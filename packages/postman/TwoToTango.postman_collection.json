@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "6fcb3cf8-961f-4841-b1f3-5c4f9f70ea0e",
+		"name": "TwoToTango",
+		"description": "Colección para probar operaciones CRUD de Tareas y autenticación de usuarios.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10392044"
+	},
+	"item": [
+		{
+			"name": "Registro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"usuario_postman\",\r\n    \"password\": \"contrasena_postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"register"
+					]
+				},
+				"description": "Registra un usuario en BD con las credenciales para acceso nombre usuario y contraseña"
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio de Sesión",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"usuario_prueba\",\r\n    \"password\": \"contrasena_segura\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"login"
+					]
+				},
+				"description": "Genera un token JWT de inicio de sesion si el usuario está registrado"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una Tarea",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenBearer}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Tarea 1\",\r\n    \"description\": \"Descripción de la tarea 1\",\r\n    \"status\": \"pendiete\",\r\n    \"dueDate\": \"2024/10/31 15:30:00\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"tasks"
+					]
+				},
+				"description": "Crea una tarea teniendo los datos basicos:\n\n**status** debe ser uno de:\n\n- pendiente\n    \n- en_progreso\n    \n- completada\n    \n\nFormato **dueDate**: \"2024/10/31 15:30:00\""
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Todas las Tareas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenBearer}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"tasks"
+					]
+				},
+				"description": "Obtiene todas las tareas del usuario registrado (logged in user)"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una Tarea por ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenBearer}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/tasks/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"tasks",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Obtiene una tarea del usuario registrado por su id de tarea"
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar una Tarea",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenBearer}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Tarea 1 Actualizada\",\r\n    \"description\": \"Descripción de la tarea actualizada\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/tasks/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"tasks",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				},
+				"description": "Actualiza una tarea segun su id"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una Tarea",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenBearer}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/tasks/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"tasks",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				},
+				"description": "Elimina una tarea por su id de tarea"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "tokenBearer",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
