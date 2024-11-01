@@ -44,9 +44,9 @@ Instalar las dependencias:
 
 ```npm install```
 
-Ejecución
+## Ejecución
 
-Ejecutar el Backend
+### Ejecutar el Backend
 
 Navegar a la carpeta del backend:
 
@@ -58,9 +58,9 @@ Iniciar el servidor:
 
 El backend estará disponible en http://localhost:3000.
 
-Ejecutar el Frontend
+### Ejecutar el Frontend
 
-Abrir otra terminal y navega a la carpeta del frontend:
+Abrir otra terminal y navegar a la carpeta del frontend:
 
 ```cd packages/frontend```
 
@@ -70,7 +70,8 @@ Iniciar el servidor:
 
 El frontend estará disponible en http://localhost:3001.
 
-Scripts Adicionales
+## Scripts Adicionales
+
 Se puede usar Lerna para ejecutar scripts en paralelo para ambos paquetes:
 
 ```npm run start:all```
